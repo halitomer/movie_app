@@ -36,6 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
             child: SafeArea(
               child: Column(
                 children: [
+                  const Text(
+                    'Welcome to my app',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    ),
+                  ),
                   const Spacer(
                     flex: 5,
                   ),
@@ -52,9 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     effect: const ExpandingDotsEffect(
                         activeDotColor: Colors.white, dotColor: Colors.red),
                   ),
-                  const SizedBox(height: 10,),
-                  TextButton(onPressed: (){}, child: const Text('fuck off')),
-                  const SizedBox( height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextButton(onPressed: () {}, child: const Text('fuck off')),
+                  const SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
