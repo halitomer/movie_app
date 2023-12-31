@@ -11,6 +11,7 @@ class Page3 extends StatelessWidget {
 
         child: (const Text(
             'unknown printer took a galley of type and scrambled it to make a type specimen book',
+            textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white
           ),

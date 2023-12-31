@@ -20,14 +20,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  alignment: Alignment.center,
-                  image: AssetImage("image/assets/bg.jpg"),
-                  fit: BoxFit.cover,
-                ),
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                alignment: Alignment.center,
+                image: AssetImage("image/assets/bg.jpg"),
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -35,16 +33,18 @@ class _MyHomePageState extends State<MyHomePage> {
             alignment: Alignment.bottomCenter,
             child: SafeArea(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  const Spacer(
+                    flex: 4,
+                  ),
                   const Text(
                     'Welcome to my app',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.white,
                     ),
-                  ),
-                  const Spacer(
-                    flex: 5,
                   ),
                   Expanded(
                     flex: 1,
@@ -53,16 +53,36 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: const [Page1(), Page2(), Page3()],
                     ),
                   ),
-                  SmoothPageIndicator(
-                    controller: _controller,
-                    count: 3,
-                    effect: const ExpandingDotsEffect(
-                        activeDotColor: Colors.white, dotColor: Colors.red),
+                  Center(
+                    child: SmoothPageIndicator(
+                      controller: _controller,
+                      count: 3,
+                      effect: const ExpandingDotsEffect(
+                          activeDotColor: Colors.white, dotColor: Colors.red),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  TextButton(onPressed: () {}, child: const Text('fuck off')),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: const Text(
+                        'Get Started',
+
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),

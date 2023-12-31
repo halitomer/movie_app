@@ -5,15 +5,13 @@ class Page1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: Container(
         margin: EdgeInsets.all(30),
-        
         child: (const Text(
-          'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',style: TextStyle(
-          fontSize: 20,
-            color: Colors.white
-        ),
+          'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20, color: Colors.white),
         )),
       ),
     );
