@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:untitled4/ind.dart';
 import 'package:untitled4/pages/page1.dart';
 import 'package:untitled4/pages/page2.dart';
 import 'package:untitled4/pages/page3.dart';
+import 'package:untitled4/sign_up.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
@@ -58,14 +58,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       controller: _controller,
                       count: 3,
                       effect: const ExpandingDotsEffect(
-                          activeDotColor: Colors.white, dotColor: Colors.red),
+                          dotHeight: 10,
+                          dotWidth: 10,
+                          activeDotColor: Colors.red,
+                          dotColor: Colors.white),
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUp(),
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.red),
                       shape: MaterialStateProperty.all(
@@ -74,11 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const Text(
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
                         'Get Started',
-
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
@@ -86,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(
                     height: 10,
                   ),
+
                 ],
               ),
             ),
