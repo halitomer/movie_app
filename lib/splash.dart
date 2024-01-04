@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:untitled4/Components/colors.dart';
 import 'home.dart';
 
 class Splash extends StatefulWidget {
@@ -10,10 +11,6 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  /// this color for background
-  final Color lightBlack = const Color.fromARGB(255, 34, 37, 46);
-  final Color white = const Color(0xFFFFFFFF);
-
   @override
   void initState() {
     super.initState();
@@ -29,7 +26,6 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBlack,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +47,8 @@ class _SplashState extends State<Splash> {
               height: 250,
               width: 250,
             ),
-            LoadingAnimationWidget.hexagonDots(color: white, size: 50),
+            LoadingAnimationWidget.hexagonDots(
+                color: AppColors.white, size: 50),
           ],
         ),
       ),

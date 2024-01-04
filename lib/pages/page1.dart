@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled4/Components/text_style.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({super.key});
@@ -11,7 +12,7 @@ class Page1 extends StatelessWidget {
         child: (const Text(
           'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: CustomTextStyle.textStyle4,
         )),
       ),
     );

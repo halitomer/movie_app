@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:untitled4/Components/colors.dart';
+import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/pages/page1.dart';
 import 'package:untitled4/pages/page2.dart';
 import 'package:untitled4/pages/page3.dart';
@@ -38,14 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Spacer(
                     flex: 4,
                   ),
-                  const Text(
-                    'Welcome to my app',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                    ),
-                  ),
+                  const Text('Welcome to my app',
+                      textAlign: TextAlign.center,
+                      style: CustomTextStyle.textStyle3),
                   Expanded(
                     flex: 1,
                     child: PageView(
@@ -60,8 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       effect: const ExpandingDotsEffect(
                           dotHeight: 10,
                           dotWidth: 10,
-                          activeDotColor: Colors.red,
-                          dotColor: Colors.white),
+                          activeDotColor: AppColors.red,
+                          dotColor: AppColors.white),
                     ),
                   ),
                   const SizedBox(
@@ -77,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                      backgroundColor: MaterialStateProperty.all(AppColors.red),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -88,14 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         'Get Started',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: AppColors.white),
                       ),
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-
                 ],
               ),
             ),

@@ -35,6 +35,8 @@ dependencies:
   loading_animation_widget:
   page_view_dot_indicator: ^2.3.0
   smooth_page_indicator: ^1.1.0
+  reactive_forms: ^16.1.1
+  flutter_screenutil: ^5.9.0
 
 
 

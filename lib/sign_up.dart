@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:untitled4/Components/colors.dart';
+import 'package:untitled4/Components/text_style.dart';
 
 import 'Components/container_text_filed.dart';
 
@@ -10,7 +13,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final Color lightBlack = const Color.fromARGB(255, 34, 37, 46);
+  final form = FormGroup({
+    'email': FormControl<String>(validators: [
+      Validators.required,
+      Validators.email,
+    ]),
+  });
+
   Color _iconColor = Colors.grey;
   var _isObscure;
   bool isChecked = false;
@@ -25,19 +34,16 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: lightBlack,
-        elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back_ios,
-            color: Colors.white,
+            color: AppColors.white,
           ),
         ),
       ),
-      backgroundColor: lightBlack,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,26 +63,27 @@ class _SignUpState extends State<SignUp> {
             ),
             const Text(
               'Create your account',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+              style: CustomTextStyle.textStyle3,
               textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 30,
             ),
-            const ContainerTextFiled(
-              child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.mail,
-                    color: Colors.grey,
-                  ),
-                  hintText: 'Email',
-                  border: InputBorder.none,
-                ),
-              ),
+            ContainerTextFiled(
+              child: ReactiveForm(
+                  formGroup: form,
+                  child: Column(
+                    children: [
+                      ReactiveTextField(
+                        formControlName: 'email',
+                        validationMessages: {
+                          'required': (error) => 'The email must not be empty',
+                          'email': (error) =>
+                              'The email value must be a valid email'
+                        },
+                      )
+                    ],
+                  )),
             ),
             ContainerTextFiled(
               child: TextField(
@@ -84,7 +91,7 @@ class _SignUpState extends State<SignUp> {
                 decoration: InputDecoration(
                     icon: const Icon(
                       Icons.lock,
-                      color: Colors.grey,
+                      color: AppColors.grey,
                     ),
                     border: InputBorder.none,
                     hintText: 'Password',
@@ -97,10 +104,10 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () {
                         setState(() {
                           _isObscure = !_isObscure;
-                          if (_iconColor == Colors.grey) {
-                            _iconColor = Colors.red;
+                          if (_iconColor == AppColors.grey) {
+                            _iconColor = AppColors.red;
                           } else {
-                            _iconColor = Colors.grey;
+                            _iconColor = AppColors.grey;
                           }
                         });
                       },
@@ -113,7 +120,7 @@ class _SignUpState extends State<SignUp> {
                 Checkbox(
                     value: isChecked,
                     checkColor: Colors.white,
-                    fillColor: MaterialStateProperty.all(Colors.red),
+                    fillColor: MaterialStateProperty.all(AppColors.red),
                     onChanged: (value) {
                       setState(() {
                         isChecked = value!;
@@ -121,10 +128,7 @@ class _SignUpState extends State<SignUp> {
                     }),
                 const Text('remember me',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    )),
+                    style: CustomTextStyle.textStyle1),
               ],
             ),
             const SizedBox(
@@ -133,7 +137,7 @@ class _SignUpState extends State<SignUp> {
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.red),
+                backgroundColor: MaterialStateProperty.all(AppColors.red),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -142,11 +146,9 @@ class _SignUpState extends State<SignUp> {
               ),
               child: const Padding(
                 padding: EdgeInsets.all(15.0),
-                child: Text(
-                  'Sign Up',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
+                child: Text('Sign Up',
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyle.textStyle1),
               ),
             ),
             const SizedBox(
@@ -155,23 +157,14 @@ class _SignUpState extends State<SignUp> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'already have an account?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('already have an account?',
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyle.textStyle1),
                 TextButton(
                     onPressed: null,
                     child: Text(
                       'Sign in ',
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
+                      style: CustomTextStyle.textStyle2,
                     ))
               ],
             )
@@ -181,3 +174,13 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+// TextField(
+// decoration: InputDecoration(
+// icon: Icon(
+// Icons.mail,
+// color: Colors.grey,
+// ),
+// hintText: 'Email',
+// border: InputBorder.none,
+// ),
+// ),
