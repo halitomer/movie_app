@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled4/splash.dart';
 
 import 'Components/colors.dart';
@@ -12,12 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-              backgroundColor: AppColors.lightBlack, elevation: 0),
-          scaffoldBackgroundColor: AppColors.lightBlack),
-      home: const Splash(),
+    return ScreenUtilInit(
+      designSize: const Size(428, 926),
+       builder: (context, child) =>  MaterialApp(
+        theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+                backgroundColor: AppColors.lightBlack, elevation: 0),
+            scaffoldBackgroundColor: AppColors.lightBlack),
+        home: const Splash(),
+      ),
     );
   }
 }
