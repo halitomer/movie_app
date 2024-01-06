@@ -9,7 +9,7 @@ class Page3 extends StatelessWidget {
     return Center(
       child: Container(
         margin: EdgeInsets.all(30),
-        child: (const Text(
+        child: ( Text(
           'unknown printer took a galley of type and scrambled it to make a type specimen book',
           textAlign: TextAlign.center,
           style: CustomTextStyle.textStyle4,

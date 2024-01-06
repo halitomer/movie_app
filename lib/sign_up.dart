@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
-
-import 'Components/container_text_filed.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -19,6 +18,15 @@ class _SignUpState extends State<SignUp> {
       Validators.email,
     ]),
   });
+  final form1 = FormGroup({
+    'password': FormControl<String>(validators: [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+    'passwordConfirmation': FormControl<String>(),
+  }, validators: [
+    Validators.mustMatch('password', 'passwordConfirmation'),
+  ]);
 
   Color _iconColor = Colors.grey;
   var _isObscure;
@@ -28,9 +36,7 @@ class _SignUpState extends State<SignUp> {
   initState() {
     super.initState();
     _isObscure = true;
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +57,8 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-                const SizedBox(
-                height: 150,
+              SizedBox(
+                height: 150.h,
               ),
               Center(
                 child: Image.asset(
@@ -64,59 +70,88 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 50,
               ),
-              const Text(
+              Text(
                 'Create your account',
                 style: CustomTextStyle.textStyle3,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
-              ContainerTextFiled(
-                child: ReactiveForm(
-                    formGroup: form,
-                    child: Column(
-                      children: [
-                        ReactiveTextField(
+              ReactiveForm(
+                  formGroup: form,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ReactiveTextField(
                           formControlName: 'email',
                           validationMessages: {
-                            'required': (error) => 'The email must not be empty',
+                            'required': (error) =>
+                                'The email must not be empty',
                             'email': (error) =>
                                 'The email value must be a valid email'
                           },
-                        )
-                      ],
-                    )),
-              ),
-              ContainerTextFiled(
-                child: TextField(
-                  obscureText: _isObscure,
-                  decoration: InputDecoration(
-                      icon: const Icon(
-                        Icons.lock,
-                        color: AppColors.grey,
-                      ),
-                      border: InputBorder.none,
-                      hintText: 'Password',
-                      suffixIcon: IconButton(
-                        padding: const EdgeInsetsDirectional.only(end: 1),
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
-                          color: _iconColor,
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            fillColor: Colors.white24,
+                            filled: true,
+                            prefixIcon: const Icon(
+                              Icons.person,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                            if (_iconColor == AppColors.grey) {
-                              _iconColor = AppColors.red;
-                            } else {
-                              _iconColor = AppColors.grey;
-                            }
-                          });
-                        },
-                      )),
-                ),
-              ),
+                      ),
+                      ReactiveForm(
+                        formGroup: form1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ReactiveTextField(
+                            formControlName: 'password',
+                            validationMessages: {
+                              'password': (error) =>
+                                  'password must be 8 characters at least',
+                              'passwordConfirmation': (error) => 'not match'
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'password',
+                              fillColor: Colors.white24,
+                              filled: true,
+                              suffixIcon: IconButton(
+                                padding:
+                                    const EdgeInsetsDirectional.only(end: 1),
+                                icon: Icon(
+                                  _isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: _iconColor,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                    if (_iconColor == AppColors.grey) {
+                                      _iconColor = AppColors.red;
+                                    } else {
+                                      _iconColor = AppColors.grey;
+                                    }
+                                  });
+                                },
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -129,13 +164,13 @@ class _SignUpState extends State<SignUp> {
                           isChecked = value!;
                         });
                       }),
-                  const Text('remember me',
+                  Text('remember me',
                       textAlign: TextAlign.center,
                       style: CustomTextStyle.textStyle1),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               ElevatedButton(
                 onPressed: () {},
@@ -147,17 +182,17 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(15.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
                   child: Text('Sign Up',
                       textAlign: TextAlign.center,
                       style: CustomTextStyle.textStyle1),
                 ),
               ),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: 30.h,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('already have an account?',

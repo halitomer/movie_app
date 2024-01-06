@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Spacer(
                     flex: 4,
                   ),
-                  const Text('Welcome to my app',
+                   Text('Welcome to my app',
                       textAlign: TextAlign.center,
                       style: CustomTextStyle.textStyle3),
                   Expanded(

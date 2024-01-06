@@ -9,7 +9,7 @@ class Page1 extends StatelessWidget {
     return Center(
       child: Container(
         margin: EdgeInsets.all(30),
-        child: (const Text(
+        child: ( Text(
           'simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
           textAlign: TextAlign.center,
           style: CustomTextStyle.textStyle4,
