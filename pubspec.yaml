@@ -37,6 +37,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   reactive_forms: ^16.1.1
   flutter_screenutil: ^5.9.0
+  firebase_core: ^2.24.2
 
 
 
@@ -73,6 +74,7 @@ flutter:
   assets:
   - image/assets/newl.png
   - image/assets/bg.jpg
+  - image/assets/homepage.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
