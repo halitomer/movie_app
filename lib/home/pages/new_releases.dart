@@ -3,26 +3,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled4/Components/text_style.dart';
 
-import '../../../Components/colors.dart';
+import '../../Components/colors.dart';
 
-class TopMovies extends StatefulWidget {
-  const TopMovies({super.key});
+class NewReleases extends StatefulWidget {
+  const NewReleases({super.key});
 
   @override
-  State<TopMovies> createState() => _TopMoviesState();
+  State<NewReleases> createState() => _NewReleasesState();
 }
 
-class _TopMoviesState extends State<TopMovies> {
+class _NewReleasesState extends State<NewReleases> {
   final db = FirebaseFirestore.instance;
-  List<Map> movies = [];
+  List<Map> newMovies = [];
 
   @override
   void initState() {
-    db.collection("movies").get().then(
+    db.collection("new_movies").get().then(
       (querySnapshot) {
         print("Successfully completed");
         for (var docSnapshot in querySnapshot.docs) {
-          movies.add(docSnapshot.data());
+          newMovies.add(docSnapshot.data());
         }
         setState(() {});
       },
@@ -36,7 +36,7 @@ class _TopMoviesState extends State<TopMovies> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Top 10 Movies This Week',
+          'New Releases',
           style: TextStyle(color: AppColors.white),
         ),
         leading: IconButton(
@@ -55,7 +55,7 @@ class _TopMoviesState extends State<TopMovies> {
           crossAxisCount: 2,
           childAspectRatio: 0.5,
         ),
-        children: movies
+        children: newMovies
             .map(
               (e) => Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -64,8 +64,7 @@ class _TopMoviesState extends State<TopMovies> {
                   child: Stack(
                     children: [
                       CachedNetworkImage(
-                        imageUrl:
-                         e['image'],
+                        imageUrl: e['image'],
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,

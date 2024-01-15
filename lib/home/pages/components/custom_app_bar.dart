@@ -84,7 +84,7 @@ class CustomAppBar extends StatelessWidget {
                     color: AppColors.white,
                   ),
                 ),
-                SizedBox(
+                 const SizedBox(
                   width: 10,
                 ),
                 ElevatedButton.icon(

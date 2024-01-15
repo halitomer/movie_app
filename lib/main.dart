@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(428, 926),
-       builder: (context, child) =>  MaterialApp(
-         debugShowCheckedModeBanner: false,
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             appBarTheme: const AppBarTheme(
                 backgroundColor: AppColors.lightBlack, elevation: 0),
