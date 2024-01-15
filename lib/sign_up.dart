@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
-import 'package:untitled4/home_page.dart';
+import 'package:untitled4/home/home_page.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,6 +14,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final form = FormGroup(
     {
       'email': FormControl<String>(validators: [
@@ -66,7 +69,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 Center(
                   child: Image.asset(
-                    'image/assets/newl.png',
+                    'assets/images/newl.png',
                     width: 130,
                     height: 130,
                   ),
@@ -87,6 +90,7 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ReactiveTextField(
+                        controller: emailController ,
                         formControlName: 'email',
                         validationMessages: {
                           'required': (error) => 'The email must not be empty',
@@ -109,6 +113,7 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ReactiveTextField(
+                        controller: passwordController ,
                         formControlName: 'password',
                         validationMessages: {
                           'password': (error) =>
@@ -176,15 +181,31 @@ class _SignUpState extends State<SignUp> {
                   builder: (context, form, child) {
                     return ElevatedButton(
                       onPressed: form.valid
-                          ? () {
-                              // If both forms are valid, navigate to HomePage.
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                ),
-                              );
-                              print(form.value);
+                          ? () async {
+                        try {
+                          final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passwordController.text
+                          );
+                          if (credential.user != null) {
+                            print('login success');
+                            // If both forms are valid, navigate to HomePage.
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            );
+                          } else {
+                            print('login failed');
+                          }
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          }
+                        }
                             }
                           : null,
                       style: ButtonStyle(
@@ -215,7 +236,7 @@ class _SignUpState extends State<SignUp> {
                         textAlign: TextAlign.center,
                         style: CustomTextStyle.textStyle1),
                     TextButton(
-                        onPressed: null,
+                        onPressed: (){},
                         child: Text(
                           'Sign in ',
                           style: CustomTextStyle.textStyle2,

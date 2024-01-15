@@ -37,7 +37,7 @@ class _SplashState extends State<Splash> {
             Center(
               child: Container(
                 child: Image.asset(
-                  'image/assets/newl.png',
+                  'assets/images/newl.png',
                   width: 200,
                   height: 200,
                 ),

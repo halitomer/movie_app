@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 alignment: Alignment.center,
-                image: AssetImage("image/assets/bg.jpg"),
+                image: AssetImage("assets/images/bg.jpg"),
                 fit: BoxFit.cover,
               ),
             ),

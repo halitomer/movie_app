@@ -38,6 +38,8 @@ dependencies:
   reactive_forms: ^16.1.1
   flutter_screenutil: ^5.9.0
   firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  cached_network_image: ^3.3.1
 
 
 
@@ -47,6 +49,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  cloud_firestore: ^4.14.0
 
 dev_dependencies:
   flutter_test:
@@ -72,9 +75,20 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - image/assets/newl.png
-  - image/assets/bg.jpg
-  - image/assets/homepage.jpg
+  - assets/images/newl.png
+  - assets/images/bg.jpg
+  - assets/images/homepage.jpg
+  - assets/images/card_images/image1.jpeg
+  - assets/images/card_images/image2.jpeg
+  - assets/images/card_images/image3.jpeg
+  - assets/images/card_images/image4.jpeg
+  - assets/images/card_images/image5.jpeg
+  - assets/images/card_images/image6.jpeg
+  - assets/images/card_images/image7.jpeg
+  - assets/images/card_images/image8.jpeg
+  - assets/images/card_images/image9.jpeg
+  - assets/images/card_images/image10.jpeg
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
