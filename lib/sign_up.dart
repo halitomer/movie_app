@@ -5,6 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/home/home_page.dart';
+import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -235,12 +236,14 @@ class _SignUpState extends State<SignUp> {
                     Text('already have an account?',
                         textAlign: TextAlign.center,
                         style: CustomTextStyle.textStyle1),
-                    TextButton(
-                        onPressed: (){},
-                        child: Text(
-                          'Sign in ',
-                          style: CustomTextStyle.textStyle2,
-                        ))
+                    MyTextButton(onTap: () {}, text: const Text('Sing In'),
+                    ),
+                    // TextButton(
+                    //     onPressed: (){},
+                    //     child: Text(
+                    //       'Sign in ',
+                    //       style: CustomTextStyle.textStyle2,
+                    //     ))
                   ],
                 )
               ],
@@ -251,13 +254,3 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
-// TextField(
-// decoration: InputDecoration(
-// icon: Icon(
-// Icons.mail,
-// color: Colors.grey,
-// ),
-// hintText: 'Email',
-// border: InputBorder.none,
-// ),
-// ),

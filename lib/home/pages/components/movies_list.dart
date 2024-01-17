@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
 import '../../../Components/colors.dart';
 import '../../../Components/text_style.dart';
@@ -8,9 +9,12 @@ import '../top_movies.dart';
 class MoviesList extends StatelessWidget {
   final List<Map> movies;
   final String title;
+  final VoidCallback onTap;
+
 
   const MoviesList({
     super.key,
+    required this.onTap,
     required this.movies,
     required this.title,
   });
@@ -29,25 +33,8 @@ class MoviesList extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TopMovies(),
-                  ),
-                );
-              },
-              style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Text(
-                'See All',
-                style: CustomTextStyle.textStyle2,
-              ),
-            ),
+            MyTextButton(onTap: onTap,text:  Text('See All'), )
+
           ],
         ),
         SizedBox(
