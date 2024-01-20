@@ -5,7 +5,7 @@ import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/pages/page1.dart';
 import 'package:untitled4/pages/page2.dart';
 import 'package:untitled4/pages/page3.dart';
-import 'package:untitled4/sign_up.dart';
+import 'package:untitled4/log_in.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignUp(),
+                          builder: (context) => const LogIn(),
                         ),
                       );
                     },

@@ -45,7 +45,7 @@ class MoviesList extends StatelessWidget {
                 .take(5)
                 .map(
                   (e) => Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Stack(
