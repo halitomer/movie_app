@@ -5,6 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/home/home_page.dart';
+import 'package:untitled4/home/pages/widgets/icon_button.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
 class SignUp extends StatefulWidget {
@@ -66,7 +67,7 @@ class _SignUpState extends State<SignUp> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: 150.h,
+                  height: 100.h,
                 ),
                 Center(
                   child: Image.asset(
@@ -76,15 +77,15 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
                 Text(
-                  'Create your account',
+                  'Login to your account',
                   style: CustomTextStyle.textStyle3,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 25.h,
                 ),
                 Column(
                   children: [
@@ -220,16 +221,40 @@ class _SignUpState extends State<SignUp> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Text('Sign Up',
+                        child: Text('Sign In',
                             textAlign: TextAlign.center,
                             style: CustomTextStyle.textStyle1),
                       ),
                     );
                   },
                 ),
+
                 SizedBox(
-                  height: 30.h,
+                  height: 20.h,
                 ),
+                Text('or sign in with',
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyle.textStyle1),
+                SizedBox( height: 20.h,),
+                 Row(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    MyIconButton(
+                      myIcon: const Icon(Icons.facebook, size: 30,) ,onTap: () {},
+                    ),
+                    MyIconButton( myIcon: const Icon(Icons.g_mobiledata_sharp, size: 30,), onTap: () {},),
+                    MyIconButton( myIcon: const Icon(Icons.apple, size: 30,) ,onTap: () {}, ),
+
+                  ],
+                ),
+
+
+                SizedBox(
+                  height: 20.h,
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -238,12 +263,6 @@ class _SignUpState extends State<SignUp> {
                         style: CustomTextStyle.textStyle1),
                     MyTextButton(onTap: () {}, text: const Text('Sing In'),
                     ),
-                    // TextButton(
-                    //     onPressed: (){},
-                    //     child: Text(
-                    //       'Sign in ',
-                    //       style: CustomTextStyle.textStyle2,
-                    //     ))
                   ],
                 )
               ],
