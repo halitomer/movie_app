@@ -4,7 +4,7 @@ import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
 import '../../../Components/colors.dart';
 import '../../../Components/text_style.dart';
-import '../top_movies.dart';
+
 
 class MoviesList extends StatelessWidget {
   final List<Map> movies;

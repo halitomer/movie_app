@@ -7,8 +7,7 @@ import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/home/home_page.dart';
 import 'package:untitled4/home/pages/widgets/icon_button.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:untitled4/log_in.dart';
 
 import '../Components/auth.dart';

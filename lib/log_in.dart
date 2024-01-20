@@ -9,8 +9,7 @@ import 'package:untitled4/home/Sign%20Up.dart';
 import 'package:untitled4/home/home_page.dart';
 import 'package:untitled4/home/pages/widgets/icon_button.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
