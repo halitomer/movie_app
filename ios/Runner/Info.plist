@@ -10,7 +10,6 @@
 		<string>Editor</string>
 		<key>CFBundleURLSchemes</key>
 		<array>
-			<!-- TODO Replace this value: -->
 			<string>com.googleusercontent.apps.956143562877-gjic02tsqpkl3amv90ie39lm3fc4hpfs</string>
 		</array>
 	</dict>
