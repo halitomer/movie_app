@@ -2,25 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:untitled4/Components/auth.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
-import 'package:untitled4/home/home_page.dart';
-import 'package:untitled4/home/pages/interest.dart';
+import 'package:untitled4/home/pages/Sign%20Up.dart';
+import 'package:untitled4/home/pages/home_page.dart';
 import 'package:untitled4/home/pages/widgets/icon_button.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
-import 'package:untitled4/log_in.dart';
-
-import '../Components/auth.dart';
-
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class LogIn extends StatefulWidget {
+  const LogIn({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LogInState extends State<LogIn> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final form = FormGroup(
@@ -72,7 +69,7 @@ class _SignUpState extends State<SignUp> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: 80.h,
+                  height: 50.h,
                 ),
                 Center(
                   child: Image.asset(
@@ -81,11 +78,11 @@ class _SignUpState extends State<SignUp> {
                     height: 130,
                   ),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 40.h,
                 ),
                 Text(
-                  'Create your account',
+                  'Login to your account',
                   style: CustomTextStyle.textStyle3,
                   textAlign: TextAlign.center,
                 ),
@@ -97,19 +94,22 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ReactiveTextField(
+                        style: const TextStyle(color: AppColors.white),
                         controller: emailController,
                         formControlName: 'email',
                         validationMessages: {
                           'required': (error) => 'The email must not be empty',
                           'email': (error) =>
-                          'The email value must be a valid email'
+                              'The email value must be a valid email'
                         },
                         decoration: InputDecoration(
                           hintText: 'Email',
+                          hintStyle: const TextStyle(color: AppColors.white),
                           fillColor: Colors.white24,
                           filled: true,
                           prefixIcon: const Icon(
                             Icons.person,
+                            color: AppColors.red,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -120,18 +120,20 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ReactiveTextField(
+                        style: TextStyle(color: AppColors.white),
                         controller: passwordController,
                         formControlName: 'password',
                         validationMessages: {
                           'password': (error) =>
-                          'password must be 8 characters at least',
+                              'password must be 8 characters at least',
                           'required': (error) =>
-                          'The password must not be empty',
+                              'The password must not be empty',
                           'minLength': (error) =>
-                          'The password must be at least 8 characters',
+                              'The password must be at least 8 characters',
                         },
                         decoration: InputDecoration(
                           hintText: 'password',
+                          hintStyle: const TextStyle(color: AppColors.white),
                           fillColor: Colors.white24,
                           filled: true,
                           suffixIcon: IconButton(
@@ -155,6 +157,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           prefixIcon: const Icon(
                             Icons.lock,
+                            color: AppColors.red,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -189,34 +192,36 @@ class _SignUpState extends State<SignUp> {
                     return ElevatedButton(
                       onPressed: form.valid
                           ? () async {
-                        try {
-                          await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text)
-                              .then((value) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>  InterestPage(),
-                              ),
-                            );
-                          });
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
-                            print('The password provided is too weak.');
-                          } else if (e.code == 'email-already-in-use') {
-                            print(
-                                'The account already exists for that email.');
-                          }
-                        } catch (e) {
-                          print(e);
-                        }
-                      }
+                              try {
+                                final credential = await FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: emailController.text,
+                                        password: passwordController.text);
+                                if (credential.user != null) {
+                                  print('login success');
+                                  // If both forms are valid, navigate to HomePage.
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                } else {
+                                  print('login failed');
+                                }
+                              } on FirebaseAuthException catch (e) {
+                                if (e.code == 'user-not-found') {
+                                  print('No user found for that email.');
+                                } else if (e.code == 'wrong-password') {
+                                  print(
+                                      'Wrong password provided for that user.');
+                                }
+                              }
+                            }
                           : null,
                       style: ButtonStyle(
                         backgroundColor:
-                        MaterialStateProperty.all(AppColors.red),
+                            MaterialStateProperty.all(AppColors.red),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -225,7 +230,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Text('Sign Up',
+                        child: Text('Sign In',
                             textAlign: TextAlign.center,
                             style: CustomTextStyle.textStyle1),
                       ),
@@ -235,57 +240,38 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Text('or Sign Up with',
+                Text('or sign in with',
                     textAlign: TextAlign.center,
                     style: CustomTextStyle.textStyle1),
                 SizedBox(
                   height: 20.h,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MyIconButton(
-                      myIcon: const Icon(
-                        Icons.facebook,
-                        size: 30,
-                      ),
-                      onTap: () {},
-                    ),
-                    MyIconButton(
-                      myIcon: const Icon(
-                        Icons.g_mobiledata_sharp,
-                        size: 30,
-                      ),
-                      onTap: () async {
-                        var result = await AuthService.signInWithGoogle();
-                        if (result != null) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        }
-                        else {
-                          print('sign failed');
-                        }
-                      },
-                    ),
-                    MyIconButton(
-                      myIcon: const Icon(
-                        Icons.apple,
-                        size: 30,
-                      ),
-                      onTap: () {},
-                    ),
-                  ],
+                MyIconButton(
+                  text: Text('Your Google Account ',
+                      textAlign: TextAlign.center,
+                      style: CustomTextStyle.textStyle1),
+                  myIcon: const Icon(
+                    Icons.g_mobiledata_sharp,
+                    size: 30,
+                  ),
+                  onTap: () async {
+                    var result = await AuthService.signInWithGoogle();
+                    if (result != null) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    } else {
+                      print('login failed');
+                    }
+                  },
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('already have an account?',
+                    Text('Dont have an account?',
                         textAlign: TextAlign.center,
                         style: CustomTextStyle.textStyle1),
                     MyTextButton(
@@ -293,11 +279,11 @@ class _SignUpState extends State<SignUp> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const LogIn(),
+                            builder: (context) => const SignUp(),
                           ),
                         );
                       },
-                      text: const Text('Sign In'),
+                      text: const Text('Sign Up'),
                     ),
                   ],
                 )

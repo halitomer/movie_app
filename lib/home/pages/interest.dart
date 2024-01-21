@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled4/Components/text_style.dart';
-import 'package:untitled4/home/home_page.dart';
+import 'package:untitled4/home/pages/home_page.dart';
 import 'package:untitled4/home/pages/data/types_data.dart';
-import 'package:untitled4/home/pages/widgets/my_elevated_button.dart';
 import '../../Components/colors.dart';
 
 class InterestPage extends StatefulWidget {

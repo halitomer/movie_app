@@ -2,23 +2,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:untitled4/Components/auth.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
-import 'package:untitled4/home/Sign%20Up.dart';
-import 'package:untitled4/home/home_page.dart';
+import 'package:untitled4/home/pages/home_page.dart';
+import 'package:untitled4/home/pages/interest.dart';
 import 'package:untitled4/home/pages/widgets/icon_button.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
+import 'package:untitled4/home/pages/log_in.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+import '../../Components/auth.dart';
+
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LogInState extends State<LogIn> {
+class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final form = FormGroup(
@@ -70,7 +72,7 @@ class _LogInState extends State<LogIn> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: 50.h,
+                  height: 80.h,
                 ),
                 Center(
                   child: Image.asset(
@@ -79,11 +81,11 @@ class _LogInState extends State<LogIn> {
                     height: 130,
                   ),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 40.h,
                 ),
                 Text(
-                  'Login to your account',
+                  'Create your account',
                   style: CustomTextStyle.textStyle3,
                   textAlign: TextAlign.center,
                 ),
@@ -95,6 +97,7 @@ class _LogInState extends State<LogIn> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ReactiveTextField(
+                        style: const TextStyle(color: AppColors.white),
                         controller: emailController,
                         formControlName: 'email',
                         validationMessages: {
@@ -104,10 +107,12 @@ class _LogInState extends State<LogIn> {
                         },
                         decoration: InputDecoration(
                           hintText: 'Email',
+                          hintStyle: const TextStyle(color: AppColors.white),
                           fillColor: Colors.white24,
                           filled: true,
                           prefixIcon: const Icon(
                             Icons.person,
+                            color: AppColors.red,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -118,6 +123,7 @@ class _LogInState extends State<LogIn> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ReactiveTextField(
+                        style: const TextStyle(color: AppColors.white),
                         controller: passwordController,
                         formControlName: 'password',
                         validationMessages: {
@@ -130,6 +136,9 @@ class _LogInState extends State<LogIn> {
                         },
                         decoration: InputDecoration(
                           hintText: 'password',
+                          hintStyle:  const TextStyle(
+                              color: AppColors.white
+                          ),
                           fillColor: Colors.white24,
                           filled: true,
                           suffixIcon: IconButton(
@@ -153,6 +162,7 @@ class _LogInState extends State<LogIn> {
                           ),
                           prefixIcon: const Icon(
                             Icons.lock,
+                            color: AppColors.red,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -188,29 +198,27 @@ class _LogInState extends State<LogIn> {
                       onPressed: form.valid
                           ? () async {
                               try {
-                                final credential = await FirebaseAuth.instance
-                                    .signInWithEmailAndPassword(
+                                await FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
                                         email: emailController.text,
-                                        password: passwordController.text);
-                                if (credential.user != null) {
-                                  print('login success');
-                                  // If both forms are valid, navigate to HomePage.
-                                  Navigator.push(
+                                        password: passwordController.text)
+                                    .then((value) {
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const HomePage(),
+                                      builder: (context) => InterestPage(),
                                     ),
                                   );
-                                } else {
-                                  print('login failed');
-                                }
+                                });
                               } on FirebaseAuthException catch (e) {
-                                if (e.code == 'user-not-found') {
-                                  print('No user found for that email.');
-                                } else if (e.code == 'wrong-password') {
+                                if (e.code == 'weak-password') {
+                                  print('The password provided is too weak.');
+                                } else if (e.code == 'email-already-in-use') {
                                   print(
-                                      'Wrong password provided for that user.');
+                                      'The account already exists for that email.');
                                 }
+                              } catch (e) {
+                                print(e);
                               }
                             }
                           : null,
@@ -225,7 +233,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Text('Sign In',
+                        child: Text('Sign Up',
                             textAlign: TextAlign.center,
                             style: CustomTextStyle.textStyle1),
                       ),
@@ -235,57 +243,38 @@ class _LogInState extends State<LogIn> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Text('or sign in with',
+                Text('or Sign Up with',
                     textAlign: TextAlign.center,
                     style: CustomTextStyle.textStyle1),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MyIconButton(
-                      myIcon: const Icon(
-                        Icons.facebook,
-                        size: 30,
-                      ),
-                      onTap: () {},
-                    ),
-                    MyIconButton(
-                      myIcon: const Icon(
-                        Icons.g_mobiledata_sharp,
-                        size: 30,
-                      ),
-                      onTap: () async {
-                        var result = await AuthService.signInWithGoogle();
-                        if (result != null) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        }
-                        else {
-                          print('login failed');
-                        }
-                      },
-                    ),
-                    MyIconButton(
-                      myIcon: const Icon(
-                        Icons.apple,
-                        size: 30,
-                      ),
-                      onTap: () {},
-                    ),
-                  ],
+                MyIconButton(
+                  text: Text('  Your Google Account ',
+                      textAlign: TextAlign.center,
+                      style: CustomTextStyle.textStyle1),
+                  myIcon: const Icon(
+                    Icons.g_mobiledata_sharp,
+                    size: 30,
+                  ),
+                  onTap: () async {
+                    var result = await AuthService.signInWithGoogle();
+                    if (result != null) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    } else {
+                      print('sign failed');
+                    }
+                  },
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Dont have an account?',
+                    Text('already have an account?',
                         textAlign: TextAlign.center,
                         style: CustomTextStyle.textStyle1),
                     MyTextButton(
@@ -293,11 +282,11 @@ class _LogInState extends State<LogIn> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignUp(),
+                            builder: (context) => const LogIn(),
                           ),
                         );
                       },
-                      text: const Text('Sign Up'),
+                      text: const Text('Sign In'),
                     ),
                   ],
                 )
@@ -308,6 +297,4 @@ class _LogInState extends State<LogIn> {
       ),
     );
   }
-
-
 }

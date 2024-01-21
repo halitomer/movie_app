@@ -7,7 +7,7 @@ import 'package:untitled4/home/pages/components/movies_list.dart';
 import 'package:untitled4/home/pages/new_releases.dart';
 import 'package:untitled4/home/pages/top_movies.dart';
 
-import 'pages/widgets/custom_app_bar.dart';
+import 'widgets/custom_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

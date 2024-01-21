@@ -6,7 +6,7 @@ import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/pages/page1.dart';
 import 'package:untitled4/pages/page2.dart';
 import 'package:untitled4/pages/page3.dart';
-import 'package:untitled4/log_in.dart';
+import 'package:untitled4/home/pages/log_in.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
