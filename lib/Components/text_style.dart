@@ -24,4 +24,20 @@ class CustomTextStyle {
     fontSize: 15.sp,
     fontWeight: FontWeight.normal,
   );
+  static TextStyle textStyle7 = TextStyle(
+    color: Colors.white,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.normal,
+    fontStyle: FontStyle.normal,
+    fontFamily: 'Roboto',
+
+  );
+  static TextStyle textStyle8 = TextStyle(
+    color: Colors.white,
+    fontSize: 15.sp,
+    fontWeight: FontWeight.normal,
+    fontStyle: FontStyle.italic,
+    fontFamily:   'Roboto',
+
+  );
 }
