@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled4/Components/text_style.dart';
 
 import '../../Components/colors.dart';
@@ -72,8 +73,8 @@ class _NewReleasesState extends State<NewReleases> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: 40,
-                          height: 20,
+                          width: 40.w,
+                          height: 20.h,
                           decoration: BoxDecoration(
                             color: AppColors.red,
                             borderRadius: BorderRadius.circular(10),

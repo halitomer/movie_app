@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
 import '../../../Components/colors.dart';
@@ -38,7 +39,7 @@ class MoviesList extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 250,
+          height: 250.h,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: movies
@@ -53,14 +54,14 @@ class MoviesList extends StatelessWidget {
                           CachedNetworkImage(
                             imageUrl: e['image'],
                             fit: BoxFit.cover,
-                            width: 150,
-                            height: 250,
+                            width: 150.w,
+                            height: 250.h,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              width: 40,
-                              height: 20,
+                              width: 40.w,
+                              height: 20.h,
                               decoration: BoxDecoration(
                                 color: AppColors.red,
                                 borderRadius: BorderRadius.circular(10),

@@ -70,7 +70,7 @@ class _LogInState extends State<LogIn> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: 80.h,
+                  height: 50.h,
                 ),
                 Center(
                   child: Image.asset(
@@ -79,8 +79,8 @@ class _LogInState extends State<LogIn> {
                     height: 130,
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
+                 SizedBox(
+                  height: 40.h,
                 ),
                 Text(
                   'Login to your account',

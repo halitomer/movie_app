@@ -80,8 +80,8 @@ class _SignUpState extends State<SignUp> {
                     height: 130,
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
+                 SizedBox(
+                  height: 40.h,
                 ),
                 Text(
                   'Create your account',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'home.dart';
@@ -30,22 +31,22 @@ class _SplashState extends State<Splash> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
-              width: 10,
-              height: 10,
+             SizedBox(
+              width: 10.w,
+              height: 10.h,
             ),
             Center(
               child: Container(
                 child: Image.asset(
                   'assets/images/newl.png',
-                  width: 200,
-                  height: 200,
+                  width: 200.w,
+                  height: 200.h,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 250,
-              width: 250,
+             SizedBox(
+              height: 250.h,
+              width: 250.w,
             ),
             LoadingAnimationWidget.hexagonDots(
                 color: AppColors.white, size: 50),

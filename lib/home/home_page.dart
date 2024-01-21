@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:untitled4/home/pages/components/movies_list.dart';
 import 'package:untitled4/home/pages/new_releases.dart';
@@ -55,8 +56,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const CustomAppBar(),
-              const SizedBox(
-                height: 5,
+               SizedBox(
+                height: 5.h,
               ),
               MoviesList(
                 onTap: () {
@@ -70,8 +71,8 @@ class _HomePageState extends State<HomePage> {
                 movies: movies,
                 title: 'Top 10 Movies This Week',
               ),
-              const SizedBox(
-                height: 5,
+               SizedBox(
+                height: 5.h,
               ),
               MoviesList(
                 onTap: () {
