@@ -72,7 +72,7 @@ class _SignUpState extends State<SignUp> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: 80.h,
+                  height: 50.h,
                 ),
                 Center(
                   child: Image.asset(
