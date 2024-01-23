@@ -5,8 +5,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:untitled4/Components/auth.dart';
 import 'package:untitled4/Components/colors.dart';
 import 'package:untitled4/Components/text_style.dart';
-import 'package:untitled4/home/pages/Sign%20Up.dart';
 import 'package:untitled4/home/pages/home_page.dart';
+import 'package:untitled4/home/pages/sign_up.dart';
 import 'package:untitled4/home/pages/widgets/icon_button.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
@@ -253,6 +253,8 @@ class _LogInState extends State<LogIn> {
                   myIcon: const Icon(
                     Icons.g_mobiledata_sharp,
                     size: 30,
+                    color: AppColors.white,
+
                   ),
                   onTap: () async {
                     var result = await AuthService.signInWithGoogle();

@@ -1,9 +1,9 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:untitled4/home/pages/components/movies_list.dart';
+import 'package:untitled4/home/pages/models/movie.dart';
 import 'package:untitled4/home/pages/new_releases.dart';
 import 'package:untitled4/home/pages/top_movies.dart';
 
@@ -18,8 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final db = FirebaseFirestore.instance;
-  List<Map> movies = [];
-  List<Map> newMovies = [];
+  List<Movie> movies = [];
 
   @override
   void initState() {
@@ -27,22 +26,13 @@ class _HomePageState extends State<HomePage> {
       (querySnapshot) {
         print("Successfully completed");
         for (var docSnapshot in querySnapshot.docs) {
-          movies.add(docSnapshot.data());
+          movies.add(Movie.fromJson(docSnapshot.data()));
         }
         setState(() {});
       },
       onError: (e) => print("Error completing: $e"),
     );
-    db.collection("new_movies").get().then(
-      (querySnapshot) {
-        print("Successfully completed");
-        for (var docSnapshot in querySnapshot.docs) {
-          newMovies.add(docSnapshot.data());
-        }
-        setState(() {});
-      },
-      onError: (e) => print("Error completing: $e"),
-    );
+
     super.initState();
   }
 
@@ -56,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const CustomAppBar(),
-               SizedBox(
+              SizedBox(
                 height: 5.h,
               ),
               MoviesList(
@@ -68,10 +58,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                movies: movies,
+                movies: movies
+                    .where((element) => element.category == MovieType.popular)
+                .take(5)
+                    .toList(),
                 title: 'Top 10 Movies This Week',
               ),
-               SizedBox(
+              SizedBox(
                 height: 5.h,
               ),
               MoviesList(
@@ -83,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                movies: newMovies,
+                movies: movies.where((element) => element.category == MovieType.newest).take(5).toList(),
                 title: 'New Releases',
               ),
             ],

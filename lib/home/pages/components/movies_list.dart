@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled4/home/pages/models/movie.dart';
 import 'package:untitled4/home/pages/widgets/my_text_button.dart';
 
 import '../../../Components/colors.dart';
@@ -8,7 +9,7 @@ import '../../../Components/text_style.dart';
 
 
 class MoviesList extends StatelessWidget {
-  final List<Map> movies;
+  final List<Movie> movies;
   final String title;
   final VoidCallback onTap;
 
@@ -52,7 +53,7 @@ class MoviesList extends StatelessWidget {
                       child: Stack(
                         children: [
                           CachedNetworkImage(
-                            imageUrl: e['image'],
+                            imageUrl: e.image,
                             fit: BoxFit.cover,
                             width: 150.w,
                             height: 250.h,
@@ -67,7 +68,7 @@ class MoviesList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: Text(e['rate'].toString(),
+                                child: Text(e.rate.toString(),
                                     style: CustomTextStyle.textStyle1
                                         .copyWith(fontSize: 10)),
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled4/Components/text_style.dart';
 import 'package:untitled4/home/pages/home_page.dart';
 import 'package:untitled4/home/pages/data/types_data.dart';
@@ -68,7 +69,7 @@ class _InterestPageState extends State<InterestPage> {
             padding: const EdgeInsets.all(20),
             child: SizedBox(
               width: double.infinity,
-              height: 50,
+              height: 50.h,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(

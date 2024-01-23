@@ -256,6 +256,7 @@ class _SignUpState extends State<SignUp> {
                   myIcon: const Icon(
                     Icons.g_mobiledata_sharp,
                     size: 30,
+                    color: AppColors.white,
                   ),
                   onTap: () async {
                     var result = await AuthService.signInWithGoogle();
@@ -263,7 +264,7 @@ class _SignUpState extends State<SignUp> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const HomePage(),
+                          builder: (context) =>  InterestPage(),
                         ),
                       );
                     } else {

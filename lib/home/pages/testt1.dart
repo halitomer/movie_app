@@ -9,24 +9,24 @@ import 'package:untitled4/home/pages/models/movie.dart';
 
 import '../../Components/colors.dart';
 
-class NewReleases extends StatefulWidget {
-  const NewReleases({Key? key}) : super(key: key);
+class TopMovies extends StatefulWidget {
+  const TopMovies({Key? key}) : super(key: key);
 
   @override
-  State<NewReleases> createState() => _NewReleasesState();
+  State<TopMovies> createState() => _TopMoviesState();
 }
 
-class _NewReleasesState extends State<NewReleases> {
+class _TopMoviesState extends State<TopMovies> {
   List<Movie> movies = [];
   PaginateRefreshedChangeListener refreshChangeListener =
-      PaginateRefreshedChangeListener();
+  PaginateRefreshedChangeListener();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'New Releases',
+          'Top 10 Movies This Week',
           style: TextStyle(color: AppColors.white),
         ),
         leading: IconButton(
@@ -40,7 +40,6 @@ class _NewReleasesState extends State<NewReleases> {
         ),
       ),
       body: RefreshIndicator(
-        color: AppColors.red,
         onRefresh: () async {
           refreshChangeListener.refreshed = true;
         },
@@ -86,7 +85,7 @@ class _NewReleasesState extends State<NewReleases> {
           },
           query: FirebaseFirestore.instance
               .collection('movies')
-              .where('category', isEqualTo: 'newest'),
+              .where('category', isEqualTo: 'popular'),
           listeners: [
             refreshChangeListener,
           ],
